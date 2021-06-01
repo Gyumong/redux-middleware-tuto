@@ -2,24 +2,24 @@
 
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearPost, getPost } from "../modules/posts";
+import { reducerUtils } from "../lib/asyncUtils";
+import { getPost } from "../modules/posts";
 const Post = ({ match }) => {
   const { id } = match.params;
+  const postId = parseInt(id);
   const dispatch = useDispatch();
   const {
     data: post,
     loading,
     error,
-  } = useSelector((state) => state.posts.post);
-  const postId = parseInt(id);
+  } = useSelector(
+    (state) => state.posts.post[postId] || reducerUtils.initial()
+  );
   useEffect(() => {
     dispatch(getPost(postId));
-    return () => {
-      dispatch(clearPost());
-    };
   }, [dispatch, postId]);
 
-  if (loading) return <div>로딩중...</div>;
+  if (loading && !post) return <div>로딩중...</div>;
   if (error) return <div>에러 발생!</div>;
   if (!post) return null;
 
