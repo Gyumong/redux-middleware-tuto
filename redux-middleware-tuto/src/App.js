@@ -1,11 +1,13 @@
 /** @format */
-
-import Counter from "./components/Counter";
+import { Route } from "react-router-dom";
+import Post from "./components/Post";
+import PostList from "./components/PostList";
 
 function App() {
   return (
     <>
-      <Counter />
+      <Route path="/" component={PostList} exact={true} />
+      <Route path="/:id" component={Post} />
     </>
   );
 }
