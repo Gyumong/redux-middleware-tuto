@@ -10,6 +10,19 @@ const DECREASE = "counter/DECREASE";
 export const increase = () => ({ type: INCREASE });
 export const decrease = () => ({ type: DECREASE });
 
+// thunk 함수
+
+export const increaseAsync = () => (dispatch) => {
+  setTimeout(() => {
+    dispatch(increase());
+  }, 1000);
+};
+
+export const decreaseAsync = () => (dispatch) => {
+  setTimeout(() => {
+    dispatch(decrease());
+  }, 1000);
+};
 // 초기 상태선언
 
 const initialState = 0; //초기 상태가 꼭 객체거나 배열일 필요는 없다. 문자나 숫자도 가능
