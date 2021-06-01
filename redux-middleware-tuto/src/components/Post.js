@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPost } from "../modules/posts";
+import { clearPost, getPost } from "../modules/posts";
 const Post = ({ match }) => {
   const { id } = match.params;
   const dispatch = useDispatch();
@@ -14,6 +14,9 @@ const Post = ({ match }) => {
   const postId = parseInt(id);
   useEffect(() => {
     dispatch(getPost(postId));
+    return () => {
+      dispatch(clearPost());
+    };
   }, [dispatch, postId]);
 
   if (loading) return <div>로딩중...</div>;
