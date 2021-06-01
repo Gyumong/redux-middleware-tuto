@@ -1,7 +1,11 @@
 /** @format */
 
 import * as postsAPI from "../api/posts";
-import { createPromiseThunk, reducerUtils } from "../lib/asyncUtils";
+import {
+  createPromiseThunk,
+  handleAsyncActions,
+  reducerUtils,
+} from "../lib/asyncUtils";
 
 // 액션 타입
 
@@ -30,38 +34,19 @@ const initialState = {
   post: reducerUtils.initial(),
 };
 
+const getPostsReducer = handleAsyncActions(GET_POSTS_LOADING, "posts");
+const getPostReducer = handleAsyncActions(GET_POST_LOADING, "post");
 export default function posts(state = initialState, action) {
   switch (action.type) {
     case GET_POSTS_LOADING:
-      return {
-        ...state,
-        posts: reducerUtils.loading(),
-      };
     case GET_POSTS_SUCCESS:
-      return {
-        ...state,
-        posts: reducerUtils.success(action.payload),
-      };
     case GET_POSTS_ERROR:
-      return {
-        ...state,
-        posts: reducerUtils.error(action.payload),
-      };
+      return getPostsReducer(state, action);
+
     case GET_POST_LOADING:
-      return {
-        ...state,
-        post: reducerUtils.loading(),
-      };
     case GET_POST_SUCCESS:
-      return {
-        ...state,
-        post: reducerUtils.success(action.payload),
-      };
     case GET_POST_ERROR:
-      return {
-        ...state,
-        post: reducerUtils.error(action.payload),
-      };
+      return getPostReducer(state, action);
     default:
       return state;
   }
