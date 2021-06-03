@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { reducerUtils } from "../lib/asyncUtils";
-import { getPost } from "../modules/posts";
+import { getPost, goToHome } from "../modules/posts";
 const Post = ({ match }) => {
   const { id } = match.params;
   const postId = parseInt(id);
@@ -25,6 +25,7 @@ const Post = ({ match }) => {
 
   return (
     <div>
+      <button onClick={() => dispatch(goToHome())}>홈으로 이동</button>
       <h1>{post.title}</h1>
       <p>{post.body}</p>
     </div>

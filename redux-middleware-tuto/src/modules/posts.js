@@ -20,6 +20,11 @@ const GET_POST_SUCCESS = "GET_POST_SUCCESS";
 const GET_POST_ERROR = "GET_POST_ERROR";
 
 const CLEAR_POST = "CLEAR_POST";
+export const goToHome =
+  () =>
+  (dispatch, getState, { history }) => {
+    history.push("/");
+  };
 
 export const getPosts = createPromiseThunk(GET_POSTS, postsAPI.getPosts);
 

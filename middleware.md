@@ -48,4 +48,10 @@ dispatch(myThunk())
 
 > 비동기 작업 쓸 때 사용
 
+FSA란?
+ACTION의 추가적인 값을 PAYLOAD란 값으로 통일 
+에러 발생시 ERROR 값을 true로 설정한다.
+
+```
+
 ## redux-saga
